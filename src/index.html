@@ -4,35 +4,101 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nice Chat</title>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="../src/css/style.css">
 </head>
+<style>
+    body {
+        margin: 10px;
+        padding: 0px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+    
+    #form {
+        background: rgba(0, 0, 0, 0.849);
+        padding: 0.25rem;
+        position: fixed;
+        bottom: 0;
+        left: 150px;
+        right: 150px;
+        display: flex;
+        height: 3rem;
+        box-sizing: border-box;
+        backdrop-filter: blur(10px);
+    }
+    #input  {
+        border: none;
+        padding: 0 1rem;
+        margin: 0.25rem;
+        border-radius: 3px;
+        outline: none;
+        color: #fff;
+    }
+    
+    #input:focus {
+        outline: none;
+    }
+    
+    #form > button {
+        background-color: #333;
+        border: none;
+        padding: 0 1rem;
+        margin: 0.25rem;
+        border-radius: 3px;
+        outline: none;
+        color: #fff;
+    }
+    
+    #messages { 
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+    
+    #messages > li { 
+        padding: 0.5rem 1rem;
+    }
+    
+    #messages > li:nth-child(odd) { 
+        background-color: #efefef;
+    }
+
+    .container-chat {
+        padding: 10px 150px 10px 150px;
+    }
+    
+    
+</style>
 <body>
-    <ul id="messages">
-        
-    </ul>
-    <form id="form" action="">
-        <input id="input" autocomplete="off"/>
-        <button>Send</button>
-    </form>
+    <div class="container-chat">
+        <div>
+            <p>NICE CHAT</p>
+            <div id="messages">
+            </div>
+            <div id="form" action="">
+                <input id="input" autocomplete="off"/>
+                <button>Send</button>
+            </div>
+        </div>
+    </div>
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
-        let socket = io();
-        const message = document.getElementById('messages')
-        const input = document.getElementById('input')
-        document.addEventListener('submit', (e) => {
-            e.preventDefault()
-            if(input.value) {
-                socket.emit('message', input.value)
-                input.value = ''
-            }
-        })
-
-        socket.on('message', (msg) => { 
-            const li = document.createElement('li')
-            li.textContent = msg
-            message.appendChild(li)
-        })
-    </script>
 </body>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    let socket = io();
+    const message = document.getElementById('messages')
+    const input = document.getElementById('input')
+    document.addEventListener('submit', (e) => {
+        e.preventDefault()
+        if(input.value) {
+            socket.emit('message', input.value)
+            input.value = ''
+        }
+    })
+
+    socket.on('message', (msg) => { 
+        const li = document.createElement('li')
+        li.textContent = msg
+        message.appendChild(li)
+    })
+</script>
 </html>
