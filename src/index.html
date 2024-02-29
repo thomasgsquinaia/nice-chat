@@ -8,10 +8,11 @@
 </head>
 <body>
     <ul id="messages">
-        <li>Text</li>
+        
     </ul>
     <form id="form" action="">
-        <input id="input" autocomplete="off"><button>Send</button>
+        <input id="input" autocomplete="off"/>
+        <button>Send</button>
     </form>
 
     <script src="/socket.io/socket.io.js"></script>
@@ -28,7 +29,7 @@
         })
 
         socket.on('message', (msg) => { 
-            document.createElement('li')
+            const li = document.createElement('li')
             li.textContent = msg
             message.appendChild(li)
         })

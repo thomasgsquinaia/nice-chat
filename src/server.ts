@@ -20,6 +20,7 @@ class App {
     listenSocket() {
         this.io.on('connection', (socket) => {
             socket.on('message', (msg) => {
+                console.log('msg: ', msg);
                 this.io.emit('message', (msg));
             })
         })
