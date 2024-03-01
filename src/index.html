@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nice Chat</title>
-    <link rel="stylesheet" href="../src/css/style.css">
 </head>
 <style>
     body {
@@ -28,7 +27,7 @@
     }
     
     #input  {
-        width:100%;
+        width:100vw;
         border: none;
         padding: 0 1rem;
         margin: 0.25rem;
@@ -56,7 +55,7 @@
     #messages { 
         list-style-type: none;
         font-family: 'Courier New', Courier, monospace;
-        width: 100%;
+        width: 100vw;
         margin: 0;
         padding: 0;
     }
@@ -76,6 +75,41 @@
     .container-chat p{
         color: #fff;
         font-size: 24px;
+    }
+
+    @media (min-width: 320px) and (max-width: 800px) {
+
+        body {
+            margin: 10px;
+            padding: 0px;
+        }
+
+        #input  {
+            margin: 0px !important;
+            padding: 0px !important;
+            border: 2px solid black;
+            color: #000;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+           
+        #form {
+            background: rgba(0, 0, 0, 0.849);
+            padding: 0 !important;
+            position: fixed;
+            bottom: 0 !important;
+            display: flex;
+            height: 3rem;
+            box-sizing: border-box;
+            backdrop-filter: blur(10px);
+            left: 0 !important;
+            right: 0 !important;
+        }
+
+        .container-chat {
+            padding: 0 !important;
+        }
+      
     }
     
     
