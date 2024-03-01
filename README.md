@@ -1,7 +1,7 @@
 # Nice Chat
 
 <p align="center">
-    <img src="./.github/chat.img" alt="documentation" width="1200px">
+    <img src="./.github/chat.img" alt="" width="1200px">
 </p>
 
 This project is an Chat built using **TypeScript, NodeJs, WebSocket**
