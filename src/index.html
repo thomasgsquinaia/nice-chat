@@ -12,7 +12,7 @@
         font-family: 'Courier New', Courier, monospace;
         background-color: #4c00ff;
     }
-    
+
     #form {
         background: rgba(0, 0, 0, 0.849);
         padding: 0.25rem;
@@ -25,9 +25,9 @@
         box-sizing: border-box;
         backdrop-filter: blur(10px);
     }
-    
+
     #input  {
-        width:100vw;
+        width: 100%;
         border: none;
         padding: 0 1rem;
         margin: 0.25rem;
@@ -36,11 +36,11 @@
         color: #000;
         font-family: 'Courier New', Courier, monospace;
     }
-    
+
     #input:focus {
         outline: none;
     }
-    
+
     #form > button {
         background-color: #333;
         border: none;
@@ -51,20 +51,25 @@
         color: #fff;
         font-family: 'Courier New', Courier, monospace;
     }
-    
-    #messages { 
+
+    #messages {
         list-style-type: none;
         font-family: 'Courier New', Courier, monospace;
         margin: 0;
         padding: 0;
+        max-height: 600px;
+        overflow-y: auto;
+        scrollbar-color: rgb(0, 0, 0) rgb(190, 173, 141);
+        scrollbar-width: thin;
+        scroll-behavior: smooth;
     }
-    
-    #messages > li { 
+
+    #messages > li {
         padding: 0.5rem 1rem;
         color: white;
     }
-    
-    #messages > li:nth-child(odd) { 
+
+    #messages > li:nth-child(odd) {
         background-color: black;
     }
 
@@ -91,7 +96,7 @@
             font-family: 'Courier New', Courier, monospace;
         }
 
-           
+
         #form {
             background: rgba(0, 0, 0, 0.849);
             padding: 0 !important;
@@ -108,20 +113,22 @@
         .container-chat {
             padding: 0 !important;
         }
-      
+
     }
-    
-    
+
+
 </style>
 <body>
 <div class="container-chat">
     <p>NICE CHAT</p>
     <div id="messages">
     </div>
-    <form id="form">
-        <input id="input" autocomplete="off"/>
-        <button>Send</button>
-    </form>
+    <div>
+        <form id="form">
+            <input id="input" autocomplete="off"/>
+            <button>Send</button>
+        </form>
+    </div>
 </div>
 
 </body>
@@ -131,18 +138,29 @@
     console.log('eu sou o socket', socket);
     const message = document.getElementById('messages')
     const input = document.getElementById('input')
+
+    // Função para rolar automaticamente para o final da lista de mensagens
+    function scrollToBottom() {
+        message.scrollTop = message.scrollHeight;
+    }
+
     document.addEventListener('submit', (e) => {
         e.preventDefault()
-        if(input.value) {
+        if (input.value) {
             socket.emit('message', input.value)
             input.value = ''
         }
     })
 
-    socket.on('message', (msg) => { 
+    socket.on('message', (msg) => {
         const li = document.createElement('li')
+        li.classList.add("listaMensagem")
         li.textContent = msg
         message.appendChild(li)
+        scrollToBottom();  // Rola para o final quando uma nova mensagem chega
     })
+
+    // Rola para o final assim que a página é carregada (caso haja mensagens no início)
+    window.onload = scrollToBottom;
 </script>
 </html>
